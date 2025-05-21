@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observando</title>
+    <style>
+        /* Colores basados en el diseño de Steam */
+        :root {
+            --steam-black: #171a21;
+            --steam-dark-gray: #1b2838;
+            --steam-blue: #66c0f4;
+            --steam-green: #5cdb95;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--steam-dark-gray);
+            color: var(--steam-blue);
+        }
+
+        header {
+            background-color: var(--steam-black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--steam-blue);
+        }
+
+        .inicio-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--steam-blue);
+            color: var(--steam-black);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .inicio-btn:hover {
+            background-color: var(--steam-green);
+        }
+
+        .slider-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto; /* Centrado horizontal */
+            overflow: hidden;
+            position: relative;
+            border: 2px solid var(--steam-blue);
+            border-radius: 10px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+        .tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    width: 30%; /* Cada tabla ocupa el 30% del ancho del contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.slider-and-table {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre el slider y la tabla */
+    align-items: center; /* Alinea verticalmente el slider y la tabla */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 40px; /* Espaciado entre el slider y la tabla */
+}
+
+.tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.detalle-grande {
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    font-weight: normal; /* Opcional: texto menos grueso */
+    color: white; /* Cambia el color del texto a blanco */
+    height: 400px; /* Permite que la altura se ajuste automáticamente al contenido */
+    vertical-align: top; /* Alinea el texto en la parte superior de la celda */
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding: 10px; /* Espaciado interno */
+}
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.rating span {
+    font-size: 32px; /* Tamaño de las estrellas */
+    color: gray; /* Color de las estrellas no seleccionadas */
+    transition: color 0.3s;
+}
+
+.rating span:hover,
+.rating span:hover ~ span {
+    color: gold; /* Color de las estrellas al pasar el mouse */
+}
+
+.rating span.selected,
+.rating span.selected ~ span {
+    color: gold; /* Color de las estrellas seleccionadas */
+}
+.slider-container {
+    width: 1000px;
+    height: 500px;
+    margin: 20px auto; /* Centrado horizontal */
+    overflow: hidden;
+    position: relative; /* Necesario para posicionar los botones */
+    border: 2px solid var(--steam-blue);
+    border-radius: 10px;
+}
+
+.slider-buttons {
+    position: absolute;
+    bottom: 10px; /* Posiciona los botones en la parte inferior del slider */
+    right: 10px; /* Alinea los botones a la derecha */
+    display: flex;
+    gap: 5px; /* Espaciado entre los botones */
+}
+
+.slider-buttons button {
+    padding: 5px 10px; /* Tamaño pequeño */
+    background-color: var(--steam-blue);
+    color: var(--steam-black);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px; /* Tamaño de fuente pequeño */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.slider-buttons button:hover {
+    background-color: var(--steam-green);
+}
+.slider-and-table .info-table {
+    width: 30%; /* Ajusta el ancho de la tabla */
+    height: 500px; /* Ajusta la altura de la tabla */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Observando</h1>
+        <a href="pagina_venta.html" class="inicio-btn">Inicio</a>
+    </header>
+
+    <div class="slider-and-table">
+        <div class="slider-container">
+            <div class="slider">
+                <img src="https://nuies.com/sky/wp-content/uploads/sites/2/2020/04/daily-quest-accomplished-sanctuary-guide-02-forest.jpg" alt="Slide 1" class="active">
+                <img src="https://th.bing.com/th/id/OIP.zgYg43uOTT5J3bIYv2ewXQHaEK?rs=1&pid=ImgDetMain" alt="Slide 2">
+                <img src="https://th.bing.com/th/id/R.067d59a0ff9cfa3b572f11e7e49d0514?rik=q5HyxbrXjK4Y%2bw&pid=ImgRaw&r=0" alt="Slide 3">
+            </div>
+            <div class="slider-buttons">
+                <button id="prev-btn">◀</button>
+                <button id="next-btn">▶</button>
+            </div>
+        </div>
+        <table class="info-table">
+            <tr>
+                <th>Sky: Niños de la Luz</th>
+            </tr>
+            <tr>
+                <td class="detalle-grande">
+                    Detalle 1<br>
+                    ky: Niños de la Luz (en chino, Sky光·遇; pinyin, Sky Guāng·yù) (acortado como Sky) es un videojuego indie social de mundo abierto desarrollado y lanzado por Thatgamecompany. Su primer lanzamiento fue en iOS el 18 de julio de 2019.[1]​ la versión de Android fue lanzada más tarde el 7 de abril del 2020,[2]​ la versión para la Nintendo Switch el 29 de junio de 2021.[3]​[4]​[5]​[6]​ y la versión para PlayStation 4 y 5 durante el 6 de diciembre de 2022. Se anunció la versión para Steam para el 10 de abril de 2024.[7]​ Una versión beta ha estado disponible desde el lanzamiento, y es actualmente usada por los jugadores para dar feedback a los desarrolladores antes de implementar una nueva actualización en el juego oficial. Existió una versión beta limitada llamada Sky: Light Awaits, el período de prueba del beta duró desde diciembre de 2017 hasta julio de 2019. El 17 de marzo de 2025 Thatgamecompany anunció el reinicio de la versión beta para el 20 de marzo de 2025 y se reanudaría alrededor del 14 de abril de 2025 con un nuevo programa de beta y un nuevo formulario de registro para los jugadores.[8]​
+
+                    Modo de juego
+                    En Sky, los jugadores podrán explorar lo que fue antes un glorioso reino usando una capa que nos da la capacidad de volar. El mapa del videojuego consiste principalmente en 7 ubicaciones únicas, cada una con una temática que representa un ciclo de la vida y una variedad de zonas por las que explorar. También estará "Home", una pequeña isla que será el lugar de inicio cuando abramos el juego y que nos permitirá viajar por el resto de ubicaciones una vez visitadas.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="tables-container">
+        <table class="info-table">
+            <tr>
+                <th>Tabla 1</th>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <div class="rating">
+                        <span data-value="5">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="1">★</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Fecha lanzamiento</th>
+            </tr>
+            <tr>
+                <td>7 de abril del 2020</td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Logros disponibles</th>
+            </tr>
+            <tr>
+                <td>50</td>
+            </tr>
+        </table>
+    </div>
+<script src="juego_07.js"></script>
+</body>
+</html>

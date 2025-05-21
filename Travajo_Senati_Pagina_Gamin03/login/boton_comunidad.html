@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad de Jugadores</title>
+    <style>
+        /* Colores basados en el diseño de Steam */
+        :root {
+            --steam-black: #171a21;
+            --steam-dark-gray: #1b2838;
+            --steam-blue: #66c0f4;
+            --steam-green: #5cdb95;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--steam-dark-gray);
+            color: var(--steam-blue);
+        }
+
+        header {
+            background-color: var(--steam-black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--steam-blue);
+        }
+
+        .inicio-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--steam-blue);
+            color: var(--steam-black);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .inicio-btn:hover {
+            background-color: var(--steam-green);
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 75vh;
+            margin: 20px auto;
+            max-width: 1000px;
+            border: 2px solid var(--steam-blue);
+            border-radius: 10px;
+            background-color: var(--steam-black);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: var(--steam-dark-gray);
+            border-top: 2px solid var(--steam-blue);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 80px;
+            background-color: var(--steam-blue);
+            color: var(--steam-black);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background-color: var(--steam-green);
+        }
+        #emojiSelector span {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 5px;
+}
+
+#emojiSelector span:hover {
+    background-color: var(--steam-blue);
+    border-radius: 5px;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén en columna */
+    justify-content: space-between; /* Coloca los mensajes arriba y la entrada abajo */
+    height: 75vh;
+    margin: 20px auto;
+    max-width: 1000px;
+    border: 2px solid var(--steam-blue);
+    border-radius: 10px;
+    background-color: var(--steam-black);
+}
+
+.chat-messages {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    padding: 10px;
+    overflow-y: auto; /* Permite desplazamiento si hay muchos mensajes */
+    color: white;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background-color: var(--steam-dark-gray);
+    border-top: 2px solid var(--steam-blue); /* Línea separadora */
+}
+.chat-input button:last-of-type {
+    background-color: var(--steam-green); /* Cambia el color de fondo a verde */
+    color: rgb(67, 148, 98); /* Cambia el color del texto a blanco */
+}
+
+.chat-input button:last-of-type:hover {
+    background-color: #1f6021; /*  4caf50 Cambia el color al pasar el mouse */
+}
+#emojiSelector {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    top: 600px; /* Ajusta la distancia desde la parte superior del chat */
+    right: 10px; /* Coloca el selector de emojis en la derecha */
+    background: var(--steam-dark-gray);
+    padding: 10px;
+    border: 1px solid var(--steam-blue);
+    border-radius: 5px;
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+}
+
+#emojiSelector span {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 5px;
+}
+
+#emojiSelector span:hover {
+    background-color: var(--steam-blue);
+    border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Comunidad de Jugadores</h1>
+        <a href="pagina_venta.html" class="inicio-btn">Inicio</a>
+    </header>
+    <div class="chat-container">
+      <div class="chat-messages" id="chatMessages">
+          <!-- Aquí aparecerán los mensajes -->
+      </div>
+      <div class="chat-input">
+          <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+          <button onclick="abrirSelectorEmojis()">😀</button>
+          <button onclick="enviarMensaje()">Enviar</button>
+      </div>
+      <div id="emojiSelector">
+          <span onclick="insertarEmoji('😊')">😊</span>
+          <span onclick="insertarEmoji('😂')">😂</span>
+          <span onclick="insertarEmoji('❤️')">❤️</span>
+          <span onclick="insertarEmoji('👍')">👍</span>
+          <span onclick="insertarEmoji('🔥')">🔥</span>
+      </div>
+  </div>
+   <script src="boton_comunidad.html"></script>
+</body>
+</html>

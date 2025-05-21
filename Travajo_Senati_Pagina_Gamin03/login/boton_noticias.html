@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Página de Noticias - Estilo Steam</title>
+    <style>
+      /* Estilos generales */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        background-color: #171a21; /* Fondo muy oscuro */
+        color: #c7d5e0;
+      }
+      header,
+      footer {
+        background: #1b2838;
+        color: #fff;
+        padding: 8px 0; /* Barra más delgada */
+        text-align: center;
+      }
+      /* Navigation styled as buttons */
+      nav {
+        background: #2a475e;
+        padding: 10px;
+        text-align: center;
+      }
+      nav button {
+        background: #2a475e;
+        border: none;
+        color: #c7d5e0;
+        margin: 0 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+      }
+      nav button:hover {
+        background: #66c0f4;
+        color: #fff;
+      }
+      .container {
+        width: 80%;
+        margin: 20px auto;
+        overflow: hidden;
+        padding: 20px;
+        background: #1b2838;
+        border-radius: 5px;
+      }
+      /* Cada noticia en un cuadro */
+      article {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #2a475e;
+        padding-bottom: 10px;
+      }
+      /* Cuadro para la imagen */
+      .news-image {
+        flex: 0 0 240px; /* Ancho fijo mayor */
+        height: 180px; /* Altura mayor */
+        margin: 0 20px; /* Márgenes izquierdo y derecho */
+        background: #2a475e;
+        border: 2px solid #66c0f4;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #66c0f4;
+        font-size: 14px;
+      }
+      /* Sección de contenido de la noticia */
+      .news-content {
+        flex: 1;
+      }
+      .news-content h2 {
+        margin-top: 0;
+        color: #66c0f4;
+      }
+      .news-content p {
+        text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Noticias Hoy</h1>
+      <!-- Título secundario eliminado -->
+    </header>
+    <nav>
+      <a href="pagina_venta.html" style="text-decoration: none;">
+        <button type="button">Inicio</button>
+      </a>
+      <button type="button" onclick="filterArticles('review')">Reseñas</button>
+      <button type="button" onclick="filterArticles('novedades')">Novedades</button>
+      <button type="button" onclick="filterArticles('soporte')">Soporte</button>
+      <button type="button" onclick="filterArticles('catalog')">Catálogo</button>
+    </nav>
+    <div class="container">
+      
+      <!-- 4 Reviews -->
+      <article class="review">
+        <div class="news-image">
+          <img src="https://cdn.wallpapersafari.com/80/89/LYb86q.jpg" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>Left 4 Dead 2</h2>
+          <p>
+           Valve prometió nuevos amigos, más zombies y un mejor apocalípsis en la segunda parte de Left for Dead, a sólo un año de distacia entre cada título, esto de matar zombies parece ser la fórmula perfecta par que la compañía explote la franquicia durante varios años
+          </p>
+          <p>★★★★★ </p>
+        </div>
+      </article>
+      <article class="review">
+        <div class="news-image">
+          <img src="https://cdn0.vox-cdn.com/thumbor/ZuDrW3cUYwn2MbDOgxgiBhqTkyI=/0x52:1680x997/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/32727259/unreal-tournament-3-1.0.jpg" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>unreal tournament</h2>
+          <p>
+            Unreal Tournament: Game of the Year Edition (UT GOTY) es uno de esos títulos que ha dejado una marca indeleble en el mundo de los videojuegos. Lanzado originalmente en 1999 y seguido por esta edición especial en el año 2000, UT GOTY atrajo a jugadores de todo el globo gracias a su combinación única de acción rápida, gráficos impresionantes y un diseño de juego innovador para su tiempo.
+          </p>
+          <p>★★★★ </p>
+        </div>
+      </article>
+      <article class="review">
+        <div class="news-image">
+          <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/10/minecraft-is-losing-one-of-its-features-in-2025.jpg" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>Minecraft</h2>
+          <p>
+            "Minecraft es uno de esos juegos que nunca envejece. Empecé construyendo una casa de tierra y terminé creando mundos gigantes con mis amigos. Me encanta la libertad que te da para explorar, construir y sobrevivir como quieras. A veces se siente solitario, pero también es súper relajante. Si te gusta la creatividad o la aventura, es imposible no engancharse."
+          </p>
+          <p>★★★★★</p>
+        </div>
+      </article>
+      <article class="review">
+        <div class="news-image">
+          <img src="https://th.bing.com/th/id/OIP.RJppnm1mNdgpzKWSvA4LrwHaHa?cb=iwc2&rs=1&pid=ImgDetMain" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>counter strike nexon zombies</h2>
+          <p>
+            Counter-Strike Nexon es un MMOFPS gratuito que ofrece acción PvP y PvE competitiva que incluye contenido del Counter-Strike original y todos los nuevos modos de juego, función de creación de mapas, armas y hordas de zombis.
+          </p>
+          <p>★★★★★</p>
+        </div>
+      </article>
+      <!-- 4 Novedades -->
+      <article class="novedades">
+        <div class="news-image">
+          <img src="https://cdn.akamai.steamstatic.com/steam/apps/815370/capsule_616x353_alt_assets_3.jpg?t=1674651276" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>creen hell</h2>
+          <p>
+           Construye tu propia cochera desde cero y crea tus líneas de autobús en City Bus Manager. Juega en tu propia ciudad natal o en cualquier ciudad famosa del mundo. Recrea la red oficial de autobuses o cámbiala a tu antojo.
+        </div>
+      </article>
+      </article>
+      <article class="novedades">
+        <div class="news-image">
+          <img src="https://th.bing.com/th/id/R.698a6d1ec351fde9f99909ad0ea19f22?rik=CgouZ%2b4VopHiew&pid=ImgRaw&r=0" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>city buss</h2>
+          <p>
+            Un autobús urbano es un tipo de autobús utilizado principalmente para el transporte público en ciudades y zonas urbanas. También se conoce como autobús de tránsito, autobús de cercanías o autobús de transporte público. Se utilizan diversas configuraciones, como las de piso bajo, piso alto, de dos pisos, articuladas y midibus.
+        </div>
+      </article>
+      <article class="novedades">
+        <div class="news-image">
+          <img src="https://th.bing.com/th/id/OIP.vA2bLRtpHOjLDLpzW7NpzAHaEK?rs=1&pid=ImgDetMain" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>PUMPKIN PANIC</h2>
+          <p>Disfruta de la vida en tu pequeña granja</p>
+          <p>
+            Tienes mucho trabajo por hacer. Siembra, riega y cosecha. Esta acogedora y tranquila granja, situada en el corazón del bosque, tiene mucho que ofrecer.
+          </div>
+      </article> 
+        <article class="novedades">
+          <div class="news-image">
+            <img src="https://th.bing.com/th?id=OIF.eLJxVZ%2fxCXLXIuNwqXFXrQ&rs=1&pid=ImgDetMain" alt="Left 4 Dead 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+          </div>
+          <div class="news-content">
+            <h2>gogh:focused with your avatar</h2>
+            <p>
+              Crea un espacio completamente tuyo, organizando muebles, decoraciones y colores a tu gusto. Añade imágenes o GIFs favoritos a monitores, pósters y otros objetos para darle un toque único a cada rincón. Guarda distintas configuraciones y cámbialas fácilmente para adaptarlas a tu estado de ánimo.
+            </p>
+          </div>
+        </article>
+     <!-- 4 Soporte -->
+ <article class="soporte">
+  <div class="news-image">
+    <img src=" https://th.bing.com/th/id/OIP.VrNFU8pU89iIumvMMAQstAHaHa?rs=1&pid=ImgDetMain" alt="Soporte 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+  </div>
+  <div class="news-content">
+    <h2> antes de cada compra en rebajas</h2>
+    <p>Ludex añade un nuevo botón que aparece tras presionar “Comprar”: “¿Estás seguro de esto, otra vez?”.</p>
+    <p>Según el equipo de soporte, la función protege a los usuarios de decisiones impulsivas durante eventos de ofertas.</p>
+    <p>Si lo ignoras cinco veces, aparece una animación de una billetera llorando.</p>
+    <p>Algunos jugadores afirman que el botón emite un suspiro silencioso.</p>
+    <p>Ludex asegura que esto mejora la salud financiera del gamer promedio.</p>
+  </div>
+</article>
+
+<article class="soporte">
+  <div class="news-image">
+    <img src=" https://th.bing.com/th/id/OIP.VrNFU8pU89iIumvMMAQstAHaHa?rs=1&pid=ImgDetMain" alt="Soporte 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+  </div>
+  <div class="news-content">
+    <h2>Soporte 2</h2>
+    <p>Ludex ahora otorga el logro oculto "Presencia espiritual" al abrir la app y cerrarla sin lanzar ningún juego.</p>
+    <p>El soporte comenta que es para premiar la fidelidad emocional, no solo el uso.</p>
+    <p>“El backlog es un lugar de reflexión”, explica el comunicado oficial</p>
+    <p>Algunos usuarios desbloquean el logro diariamente sin darse cuenta</p>
+    <p>Se planea añadir otro llamado “Meditación en la biblioteca”.</p>
+  </div>
+</article>
+
+<article class="soporte">
+  <div class="news-image">
+    <img src=" https://th.bing.com/th/id/OIP.VrNFU8pU89iIumvMMAQstAHaHa?rs=1&pid=ImgDetMain" alt="Soporte 3" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+  </div>
+  <div class="news-content">
+    <h2>Ludex habilita soporte por IA que solo responde con memes de juegos que no existen</h2>
+    <p>Ludex estrena un asistente técnico que responde únicamente con memes de títulos aún no lanzados.</p>
+    <p>Al preguntar sobre errores, la IA responde con imágenes de “Elder Scrolls 7” o “Half-Portal: Awakening”.</p>
+    <p>Jugadores confundidos creen estar en una beta ultra secreta.</p>
+    <p>El soporte aclara: “Es un ejercicio de paciencia y humor”.</p>
+    <p>Algunos creen que es parte de un ARG que ni Ludex comprende del todo.</p>
+  </div>
+</article>      
+<article class="soporte">
+  <div class="news-image">
+    <img src=" https://th.bing.com/th/id/OIP.VrNFU8pU89iIumvMMAQstAHaHa?rs=1&pid=ImgDetMain" alt="Soporte 4" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+  </div>
+  <div class="news-content">
+    <h2>Ludex añadirá suscripciones para dejar de comprar juegos nuevos sin culpa</h2>
+    <p>Ludex lanza “Modo Zen”, una suscripción mensual que otorga paz mental por no jugar nada.</p>
+    <p>Incluye fondos relajantes, frases motivacionales y estadísticas de procrastinación saludable.</p>
+    <p>El soporte indica que ayuda a “aceptar que no hay tiempo, y está bien”.</p>
+    <p>Los miembros recibirán medallas digitales por ignorar lanzamientos semanales.</p>
+    <p>También incluye el acceso anticipado al botón “Solo estoy mirando”.</p>
+  </div>
+</article>
+      <!-- 3 Catálogo entries -->
+      <article class="catalog">
+        <div class="news-image">
+          <img src="https://media.nichegamer.com/wp-content/uploads/2024/02/v-rising-01-31-24-1.jpg" alt="City Buss" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>V Rising</h2>
+          <p>
+            Despierta siendo un vampiro debilitado tras siglos de letargo. Parte de cacería en busca de sangre para recuperar tu fuerza, a la par vez que te escondes de la abrasadora luz solar. Reconstruye tu castillo y transforma a humanos en tus leales sirvientes en una misión para alzar tu imperio vampírico. Haz aliados o enemigos jugando en linea o juega sólo, desafiando a soldados sagrados y batallando en la guerra de un mundo sumido en conflicto.
+          </p>
+        </div>
+      </article>
+      <article class="catalog">
+        <div class="news-image">
+          <img src="https://www.gamerscore.com.br/wp-content/uploads/2024/01/DRAGON-BALL-Sparking-ZERO.webp" alt="City Buss" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>DRAGON BALL: Sparking! ZERO</h2>
+          <p>
+            DRAGON BALL: ¡Chispas! ZERO lleva la legendaria jugabilidad de la serie Budokai Tenkaichi a…
+¡Sacude la tierra! ¡Rompe los cielos! ¡Haz tuyo el poder destructivo de los luchadores más fuertes que jamás hayan aparecido en DRAGON BALL!
+          </p>
+        </div>
+    </article>
+      <article class="catalog">
+        <div class="news-image">
+          <img src="https://media.nichegamer.com/wp-content/uploads/2024/09/bleach-rebirth-of-souls-09-26-24-1-1024x576.jpg" alt="City Buss" style="width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" />
+        </div>
+        <div class="news-content">
+          <h2>BLEACH Rebirth of Souls</h2>
+          <p>
+            ¡Despierta la espada en tu interior y revierte tu destino en BLEACH Rebirth of Souls! Participa en batallas emocionantes donde podrás desplegar poderosas capacidades de espadas y personajes de esta legendaria franquicia de anime.
+          </p>
+        </div>
+      </article>
+    </div>
+    <footer>
+      <p>©noticias Ludex_informacion actualizada 2025</p>
+    </footer>
+  <script src="boton_noticias.js"></script>
+  </body>
+</html>

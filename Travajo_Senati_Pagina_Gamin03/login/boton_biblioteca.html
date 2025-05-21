@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca de Videojuegos - Steam Colors</title>
+  <style>
+    /* Steam-inspired color scheme */
+    :root {
+      --steam-bg: #171a21;        /* Main background color (dark) */
+      --steam-light-bg: #1b2838;   /* Lighter background for containers/cards */
+      --steam-accent: #66c0f4;      /* Blue accent color */
+      --steam-text: #ffffff;       /* White text */
+    }
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--steam-bg);
+      color: var(--steam-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: var(--steam-bg);
+      padding: 20px;
+      border-bottom: 2px solid var(--steam-light-bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    header .search-input {
+      width: 250px;
+      padding: 8px 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid var(--steam-light-bg);
+      background-color: var(--steam-light-bg);
+      color: var(--steam-text);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px;
+      padding: 0 20px;
+      flex: 1;
+    }
+    /* "Tus juegos" header */
+    .games-header {
+      display: inline-block;
+      background-color: var(--steam-light-bg);
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      border: 1px solid var(--steam-bg);
+      border-radius: 5px;
+      font-size: 26px;
+      color: var(--steam-accent);
+    }
+    /* Game list styles */
+    .game-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: flex-start;
+    }
+    .game-item {
+      background-color: var(--steam-light-bg);
+      border: 1px solid var(--steam-bg);
+      border-radius: 5px;
+      width: 320px;  /* Increased width for a larger box */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+    }
+    .game-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    }
+    /* New inner box for the image */
+    .image-box {
+      width: 90%;
+      height: 200px;      /* Fixed height for the image container */
+      margin: 15px auto 10px auto;
+      border: 2px dashed var(--steam-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--steam-bg);
+    }
+    .image-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+    .game-content {
+      padding: 15px;
+      text-align: center;
+    }
+    .game-title {
+      font-size: 22px;
+      color: var(--steam-accent);
+      margin: 0;
+    }
+    /* Green button to play */
+    .play-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+    .play-btn:hover {
+      background-color: #45a049;
+    }
+    .inicio-btn {
+  background-color: #4CAF50; /* Color verde */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  font-size: 16px; /* Tamaño de fuente */
+  transition: background-color 0.2s; /* Transición suave */
+}
+
+.inicio-btn:hover {
+  background-color: #45a049; /* Color más oscuro al pasar el mouse */
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Biblioteca de Videojuegos</h1>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <input type="text" class="search-input" id="searchInput" placeholder="Buscar juegos...">
+      <button class="inicio-btn" onclick="window.location.href='pagina_venta.html'">Inicio</button>
+    </div>
+  </header>
+  <div class="container">
+    <!-- "Tus juegos" header box -->
+    <div class="games-header">Tus juegos</div>
+    <section class="game-list" id="gameList">
+      <!-- Example Game 1 -->
+      <article class="game-item">
+        <div class="image-box">
+          <img src="https://cdn.wallpapersafari.com/80/89/LYb86q.jpg" alt="Imagen de Juego 3">
+        </div>
+        <div class="game-content">
+          <h2 class="game-title">left 4 dead 2</h2>
+          <button class="play-btn">Jugar</button>
+        </div>
+      </article>
+      <!-- Example Game 2 -->
+      <article class="game-item">
+        <div class="image-box">
+          <img src="https://www.gaming.net/wp-content/uploads/2023/03/Counter-Strike-2-1.jpg" alt="Imagen de Juego 3">
+        </div>
+        <div class="game-content">
+          <h2 class="game-title">Counter strike</h2>
+          <button class="play-btn">Jugar</button>
+        </div>
+      </article>
+      <!-- Example Game 3 -->
+      <article class="game-item">
+        <div class="image-box">
+          <img src="https://elcandelerotecnologico.com/wp-content/uploads/2024/03/juegos_albion-online.png" alt="Imagen de Juego 3">
+        </div>
+        <div class="game-content">
+          <h2 class="game-title">albion online</h2>
+          <button class="play-btn">Jugar</button>
+        </div>
+      </article>
+      <!-- Add more game items as needed -->
+    </section>
+  </div>
+  <script src="boton_biblioteca.js"></script>
+</body>
+</html>

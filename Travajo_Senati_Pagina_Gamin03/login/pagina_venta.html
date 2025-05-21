@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="font-sans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda de Juegos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #1b2838;
+        color: white;
+      }
+      #buscador {
+        background-color: white;
+        color: black;
+        width: 200px;
+        padding: 8px;
+        border-radius: 5px;
+      }
+      .sidebar {
+        background-color: #2a475e;
+        color: white;
+        width: 250px;
+        padding: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      .sidebar h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+      .button-group button {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 6px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.875rem;
+      }
+      .categorias button,
+      .recomendado button,
+      .genero button {
+        background-color: #1a293a;
+      }
+      .categorias button:hover,
+      .recomendado button:hover,
+      .genero button:hover {
+        background-color: #1a293a;
+      }
+      .content-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 1.5rem;
+      }
+      .main-content {
+        flex: 1;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header img {
+        margin-left: 5px;
+      }
+      .nav-buttons button {
+        background-color: #1a293a;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.875rem;
+      }
+      .nav-buttons button:hover {
+        background-color: #1a293a;
+      }
+      .shopping-cart-btn {
+        display: inline-flex;
+        align-items: center;
+        background-color: #11481d;
+        border: none;
+        padding: 6px 12px;
+        color: white;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .shopping-cart-btn:hover {
+        background-color: #11481d;
+      }
+     
+      .game-slider {
+        position: relative;
+        height: 10rem;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        padding: 4px;
+      }
+      .game-slider img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .game-slider img.active {
+        opacity: 1;
+      }
+      
+      .game-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      }
+      
+      .bottom-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1300px;
+  height: 570px;
+  margin: 20px auto;
+  overflow: hidden;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.bottom-slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.bottom-slider img.active {
+  opacity: 1;
+}
+      
+      .bottom-slider-controls {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2;
+      }
+      
+      .juegos-nuevos-btn {
+        background-color: #1b5b7f;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+      .juegos-nuevos-btn:hover {
+        background-color: #1b5b7f;
+      }
+      /* Existing slider controls for navigation */
+      .slider-controls {
+        display: flex;
+        gap: 5px;
+      }
+      .slider-controls button {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: #fff;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 3px;
+      }
+      .slider-controls button:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+      /* Inner slider styles for extra game cards */
+      .inner-slider {
+        position: relative;
+        height: 10rem;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        padding: 4px;
+      }
+      .inner-slider img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .inner-slider img.active {
+        opacity: 1;
+      }
+      /* Converted section title buttons */
+      .section-button {
+        display: inline-block;
+        border: 2px solid #ffffff;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        background-color: transparent;
+        color: #ffffff;
+        cursor: pointer;
+      }
+      .section-button:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      /* Ensure the game grid container has a bottom margin */
+      #gameGrid {
+        margin-bottom: 2rem;
+      }
+      @media (max-width: 768px) {
+        .content-container {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+        }
+      }
+      /* Custom "Steam" style for game cards */
+      .bg-steam {
+        background-color: #171a21; /* Steam dark background */
+      }
+      .hover\:bg-steam-hover:hover {
+        background-color: #14181c; /* Slightly lighter on hover */
+      }
+      footer {
+  background-color: #1b2838; /* Fondo oscuro */
+  color: white; /* Texto blanco */
+  text-align: center; /* Centrar el texto */
+  padding: 10px 0; /* Espaciado vertical */
+  margin-top: 20px; /* Separación del contenido anterior */
+  font-size: 14px; /* Tamaño de fuente */
+}
+.logo {
+    width: 50px; /* Ancho del logo */
+    height: 50px; /* Altura del logo */
+    object-fit: contain; /* Asegura que la imagen se ajuste sin distorsión */
+    margin-left: 10px; /* Espaciado entre el texto y el logo */
+}
+    </style>
+  </head>
+  <body>
+    <header class="bg-gray-900 p-4 header">
+      <h1 class="text-2xl font-bold text-blue-400 flex items-center">
+        Ludex
+       <img src="logo.png.png" alt="Logo" class="logo" />
+      </h1>
+      <nav class="flex items-center space-x-4 nav-buttons">
+        <input
+          type="text"
+          id="buscador"
+          class="rounded-lg"
+          placeholder="Buscar juego..."
+        />
+        <!-- Navigation buttons -->
+        <button onclick="window.location.href='boton_noticias.html'">Noticias</button>
+        <button onclick="window.location.href='boton_biblioteca.html'">Biblioteca</button>
+        <button onclick="window.location.href='boton_comunidad.html'">Comunidad</button>
+        <!-- Shopping cart button -->
+        <button class="shopping-cart-btn" onclick="window.location.href='boton_carrito.html'">
+          🛒 Carrito (0)
+        </button>
+       <!-- Botón Login -->
+      <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='login.html'">
+      Login
+      </button>
+      </nav>
+    </header>
+    <div class="content-container">
+      <div class="main-content">
+        <!-- Section: Featured Games -->
+        <button class="section-button" onclick="window.location.href='destacados.html'">
+          Juegos destacados
+        </button>
+        <!-- Game grid container -->
+        <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Game Card 1 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://1.bp.blogspot.com/-Xd0NzegXTyE/WcBaqtOANEI/AAAAAAAAAQw/eJ8RVaEJ8escz4f42UvpsUrK4zhjZn1WgCLcBGAs/s1600/H2x1_NSwitch_MinecraftNintendoSwitchEdition.jpg" alt="Game 1 Image 1" class="active" />
+              <img src="https://2.bp.blogspot.com/-_XFAENyAAbY/W0y45GlY0lI/AAAAAAAAAIM/wjgbW2i87BUhy_a1deZOwRc1BvaI1lFxwCLcBGAs/s1600/minecraft-ps4-image.jpg" alt="Game 1 Image 2" />
+              <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/10/minecraft-is-losing-one-of-its-features-in-2025.jpg" alt="Game 1 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">Minecraft</h2>
+            <p class="mb-2">$29.99</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_01.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+          <!-- Game Card 2 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://cdn0.vox-cdn.com/thumbor/ZuDrW3cUYwn2MbDOgxgiBhqTkyI=/0x52:1680x997/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/32727259/unreal-tournament-3-1.0.jpg" alt="Game 2 Image 1" class="active" />
+              <img src="https://th.bing.com/th/id/R.04934cd141f8202635898a0db62b9c91?rik=Qt6PygyszuITCw&pid=ImgRaw&r=0" alt="Game 2 Image 2" />
+              <img src="https://th.bing.com/th/id/R.18e546e524b99b908e965824486bb8b8?rik=fPE22xlouspW3w&pid=ImgRaw&r=0" alt="Game 2 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">unreal tournament</h2>
+            <p class="mb-2">$39.99</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_02.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+          <!-- Game Card 3 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://i.pinimg.com/originals/a6/80/04/a6800496040eb21fe863fc0b68d9f897.jpg" alt="Game 3 Image 1" class="active" />
+              <img src="https://th.bing.com/th/id/R.814b37003dac1adaeca7f9f4af84fef4?rik=4Sr9e57ezUJ99A&pid=ImgRaw&r=0" alt="Game 3 Image 2" />
+              <img src="https://th.bing.com/th/id/R.2e2d6a73322c480f64db37154a9c4e59?rik=fPQWVxRKYZ2F8w&riu=http%3a%2f%2f1.bp.blogspot.com%2f-yBHx8yy7-Ek%2fUssLIag0z_I%2fAAAAAAAAA6w%2fAp6lQB3r-Yk%2fs1600%2fBlur.jpg&ehk=2u8k1%2bksFrOM0hYM9zQsZgfL5lm7dJ2UKNt3flQTZl0%3d&risl=&pid=ImgRaw&r=0" alt="Game 3 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">Blur</h2>
+            <p class="mb-2">$49.99</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_03.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+          <!-- Game Card 4 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://cdn.wallpapersafari.com/80/89/LYb86q.jpg" alt="Game 4 Image 1" class="active" />
+              <img src="https://th.bing.com/th/id/OIP.dhrnu653e-ArSOvpY0X8kwHaEK?rs=1&pid=ImgDetMain" alt="Game 4 Image 2" />
+              <img src="https://th.bing.com/th/id/R.98e95bece083206a397af85adb94f75e?rik=K0gWAJoiNj4Gew&riu=http%3a%2f%2fwww.dadsgamingaddiction.com%2fwp-content%2fuploads%2f2012%2f06%2f2012-06-26_00011.jpg&ehk=GydfwvhRBYPe73OfcweCKyTXkFhMFr3aA4G3PE%2fzD6s%3d&risl=&pid=ImgRaw&r=0" alt="Game 4 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">left 4 dead 2</h2>
+            <p class="mb-2">$59.99</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_04.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Section: Games on Sale -->
+        <button class="section-button my-4" onclick="window.location.href='oferta.html'">
+          Juegos en Gratis
+        </button>
+        <!-- Second game grid container -->
+        <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Game Card 5 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://www.gaming.net/wp-content/uploads/2023/03/Counter-Strike-2-1.jpg" alt="Game 5 Image 1" class="active" />
+              <img src="https://th.bing.com/th/id/R.4e1ae52214767afe5b17bfdcb3b0a697?rik=MSV5L3aJ7kyRnA&riu=http%3a%2f%2fimg1.replays.net%2fcsgo.fpstt.com%2fuploads%2fbody%2f2016%2f08%2f1470282318mgf.jpg&ehk=yH%2bFmrgDoWxyfpLR6tWCKiSXm5iwPcP%2b%2fklCC2%2fTCjY%3d&risl=&pid=ImgRaw&r=0" alt="Game 5 Image 2" />
+              <img src="https://esports.eldesmarque.com/wp-content/uploads/2018/10/MP5-SD.jpg" alt="Game 5 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">Counter-Strike 2</h2>
+            <p class="mb-2">$00.00</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_05.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+          <!-- Game Card 6 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://th.bing.com/th/id/OIP.ToEDKWy9NAEsZBcAr6eJXwHaEK?w=1280&h=720&rs=1&pid=ImgDetMain" alt="Game 6 Image 1" class="active" />
+              <img src="https://steamcdn-a.akamaihd.net/steam/apps/273110/ss_6ed9ef84059e50e29eb3ac527ae5ee8d4f12fe91.1920x1080.jpg?t=1572595043" alt="Game 6 Image 2" />
+              <img src="https://cdn.akamai.steamstatic.com/steam/apps/273110/ss_d0066aac090e642d1bc75afd49fe51858b744f0a.1920x1080.jpg?t=1707988873" alt="Game 6 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">Counter-Strike Nexon</h2>
+            <p class="mb-2">$00.00</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_06.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+          <!-- Game Card 7 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://nuies.com/sky/wp-content/uploads/sites/2/2020/04/daily-quest-accomplished-sanctuary-guide-02-forest.jpg" alt="Game 7 Image 1" class="active" />
+              <img src="https://th.bing.com/th/id/OIP.zgYg43uOTT5J3bIYv2ewXQHaEK?rs=1&pid=ImgDetMain" alt="Game 7 Image 2" />
+              <img src="https://th.bing.com/th/id/R.067d59a0ff9cfa3b572f11e7e49d0514?rik=q5HyxbrXjK4Y%2bw&pid=ImgRaw&r=0" alt="Game 7 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">Sky: Niños de la Luz</h2>
+            <p class="mb-2">$00.00</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_07.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+          <!-- Game Card 8 -->
+          <div class="bg-steam text-white p-4 rounded shadow game-item">
+            <div class="game-slider">
+              <img src="https://elcandelerotecnologico.com/wp-content/uploads/2024/03/juegos_albion-online.png" alt="Game 8 Image 1" class="active" />
+              <img src="https://th.bing.com/th/id/R.33fefd0d7bdb22193ea7bcba1ed80d4b?rik=G6T4bnfc%2fihFLA&pid=ImgRaw&r=0" alt="Game 8 Image 2" />
+              <img src="https://play-lh.googleusercontent.com/vbijPpoidHJk0JbhJw_niAD-sXqsKgmCevEpNcvQccPQta4rMwQN2axTxhDTKItPGoZX=w526-h296" alt="Game 8 Image 3" />
+            </div>
+            <h2 class="text-xl font-bold mb-2">Albion Online</h2>
+            <p class="mb-2">$00.00</p>
+            <div class="flex justify-between">
+              <button class="bg-steam hover:bg-steam-hover text-white py-1 px-2 rounded">
+                Comprar
+              </button>
+              <button class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded" onclick="window.location.href='juego_08.html'">
+                Ver
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="sidebar">
+        <h3>Recomendado</h3>
+        <div class="button-group categorias">
+          <button onclick="window.location.href='amigos.html'">amigos</button>
+          <button onclick="window.location.href='multijugador.html'">Multijugador</button>
+          <button onclick="window.location.href='estrategia.html'">Estrategia</button>
+          <button onclick="window.location.href='solitarios.html'">solitarios</button>
+          <button onclick="window.location.href='aventuras.html'">aventuras</button>
+        </div>
+        <h3>Categorias</h3>
+        <div class="button-group recomendado">
+          <button onclick="window.location.href='masjugado.html'">lo mas jugado</button>
+          <button onclick="window.location.href='masvendido.html'">lo mas vendido</button>
+          <button onclick="window.location.href='nuevos.html'">nuevos</button>
+        </div>
+        <h3>Género</h3>
+        <div class="button-group genero">
+          <button onclick="window.location.href='accion.html'">Acción</button>
+          <button onclick="window.location.href='aventura.html'">Aventura</button>
+          <button onclick="window.location.href='puzzle.html'">Puzzle</button>
+          <button onclick="window.location.href='deportes.html'">Deportes</button>
+          <button onclick="window.location.href='casules.html'">Casules</button>
+          <button onclick="window.location.href='carreras.html'">Carreras</button>
+        </div>
+      </aside>
+    </div>
+    <!-- Bottom slider with 10 images and navigation buttons -->
+    <div class="bottom-slider">
+      <div class="bottom-slider-controls">
+        <button class="juegos-nuevos-btn" onclick="window.location.href='proximos.html'">
+          Juegos proximos
+        </button>
+        <div class="slider-controls">
+          <button class="prev-button">&#9664;</button>
+          <button class="next-button">&#9654;</button>
+        </div>
+      </div>
+      <img src="https://www.solofondos.com/wp-content/uploads/2015/12/A87-2048x1152.jpg" alt="Slide 1" class="active" />
+      <img src="https://th.bing.com/th/id/R.c029dd6dfceb9c176acfa2e933e88877?rik=aCIwMA5fimxM2w&riu=http%3a%2f%2fimg.youtube.com%2fvi%2fAiXTn4mOXsI%2fmaxresdefault.jpg&ehk=uULMLQ4pc0UJsA%2bGAY85gdee%2bOu4Ij7wD6xO%2f3mFbEQ%3d&risl=&pid=ImgRaw&r=0" alt="Slide 2" />
+      <img src="https://www.solofondos.com/wp-content/uploads/2015/12/75d2fa265e45b7af83334913e2a05ce3.jpg" alt="Slide 3" />
+      <img src="https://wallpapercave.com/wp/wp4610116.jpg" alt="Slide 4" />
+      <img src="https://www.solofondos.com/wp-content/uploads/2015/12/fondos-de-pantalla-hd-juegos-pc.jpg" alt="Slide 5" />
+      <img src="https://lede-admin.usa.streetsblog.org/wp-content/uploads/sites/46/2022/11/STREETSBLOG1440.jpg" alt="Slide 6" />
+      <img src="https://cdn.wccftech.com/wp-content/uploads/2024/07/avowed-overlook-HD-scaled.jpg" alt="Slide 7" />
+      <img src="https://th.bing.com/th/id/R.f0cab2bcc4cb80342703e17e6b8b3740?rik=URo%2fGyI5v1xeZQ&pid=ImgRaw&r=0" alt="Slide 8" />
+      <img src="https://th.bing.com/th/id/OIP.bTHSSmoVNYc4L-Isj_sy1wHaEK?w=1280&h=720&rs=1&pid=ImgDetMain" alt="Slide 9" />
+      <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2023/09/ea-sports-wrc-3127002.jpg?tf=3840x" alt="Slide 10" />
+    </div>
+    <script src="pagina_venta.js"></script>
+    <footer>
+      <table style="width: 100%; text-align: center; background-color: #171d25; color: white; padding: 40px 0; margin-top: 20px; font-size: 20px; height: 100px;">
+        <tr>
+          <td>© Ludex_juegos actualizada 2025</td>
+        </tr>
+      </table>
+    </footer>
+  </body>
+</html>

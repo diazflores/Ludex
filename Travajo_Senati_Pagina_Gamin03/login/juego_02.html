@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observando</title>
+    <style>
+        /* Colores basados en el diseño de Steam */
+        :root {
+            --steam-black: #171a21;
+            --steam-dark-gray: #1b2838;
+            --steam-blue: #66c0f4;
+            --steam-green: #5cdb95;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--steam-dark-gray);
+            color: var(--steam-blue);
+        }
+
+        header {
+            background-color: var(--steam-black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--steam-blue);
+        }
+
+        .inicio-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--steam-blue);
+            color: var(--steam-black);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .inicio-btn:hover {
+            background-color: var(--steam-green);
+        }
+
+        .slider-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto; /* Centrado horizontal */
+            overflow: hidden;
+            position: relative;
+            border: 2px solid var(--steam-blue);
+            border-radius: 10px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+        .tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    width: 30%; /* Cada tabla ocupa el 30% del ancho del contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.slider-and-table {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre el slider y la tabla */
+    align-items: center; /* Alinea verticalmente el slider y la tabla */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 40px; /* Espaciado entre el slider y la tabla */
+}
+
+.tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.detalle-grande {
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    font-weight: normal; /* Opcional: texto menos grueso */
+    color: white; /* Cambia el color del texto a blanco */
+    height: 400px; /* Permite que la altura se ajuste automáticamente al contenido */
+    vertical-align: top; /* Alinea el texto en la parte superior de la celda */
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding: 10px; /* Espaciado interno */
+}
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.rating span {
+    font-size: 32px; /* Tamaño de las estrellas */
+    color: gray; /* Color de las estrellas no seleccionadas */
+    transition: color 0.3s;
+}
+
+.rating span:hover,
+.rating span:hover ~ span {
+    color: gold; /* Color de las estrellas al pasar el mouse */
+}
+
+.rating span.selected,
+.rating span.selected ~ span {
+    color: gold; /* Color de las estrellas seleccionadas */
+}
+.slider-container {
+    width: 1000px;
+    height: 500px;
+    margin: 20px auto; /* Centrado horizontal */
+    overflow: hidden;
+    position: relative; /* Necesario para posicionar los botones */
+    border: 2px solid var(--steam-blue);
+    border-radius: 10px;
+}
+
+.slider-buttons {
+    position: absolute;
+    bottom: 10px; /* Posiciona los botones en la parte inferior del slider */
+    right: 10px; /* Alinea los botones a la derecha */
+    display: flex;
+    gap: 5px; /* Espaciado entre los botones */
+}
+
+.slider-buttons button {
+    padding: 5px 10px; /* Tamaño pequeño */
+    background-color: var(--steam-blue);
+    color: var(--steam-black);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px; /* Tamaño de fuente pequeño */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.slider-buttons button:hover {
+    background-color: var(--steam-green);
+}
+.slider-and-table .info-table {
+    width: 30%; /* Ajusta el ancho de la tabla */
+    height: 500px; /* Ajusta la altura de la tabla */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Observando</h1>
+        <a href="pagina_venta.html" class="inicio-btn">Inicio</a>
+    </header>
+
+    <div class="slider-and-table">
+        <div class="slider-container">
+            <div class="slider">
+                <img src="https://cdn0.vox-cdn.com/thumbor/ZuDrW3cUYwn2MbDOgxgiBhqTkyI=/0x52:1680x997/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/32727259/unreal-tournament-3-1.0.jpg" alt="Slide 1" class="active">
+                <img src="https://th.bing.com/th/id/R.04934cd141f8202635898a0db62b9c91?rik=Qt6PygyszuITCw&pid=ImgRaw&r=0" alt="Slide 2">
+                <img src="https://th.bing.com/th/id/R.18e546e524b99b908e965824486bb8b8?rik=fPE22xlouspW3w&pid=ImgRaw&r=0" alt="Slide 3">
+            </div>
+            <div class="slider-buttons">
+                <button id="prev-btn">◀</button>
+                <button id="next-btn">▶</button>
+            </div>
+        </div>
+        <table class="info-table">
+            <tr>
+                <th>Unreal Tournament</th>
+            </tr>
+            <tr>
+                <td class="detalle-grande">
+                    Detalle 1<br>
+                    Unreal Tournament, también conocido como UT y llamado en ocasiones UT99, UT Classic, UT1, o UT:GOTY para diferenciarlo de sus sucesores (Unreal Tournament 2003, Unreal Tournament 2004, Unreal Tournament 3, Y Unreal Tournament 4), es un videojuego de acción en primera persona. Lanzado al mercado en 1999, es la continuación del juego Unreal de Epic Games, y su principal enfoque es la acción para multijugador. Compite directamente con el juego Quake III Arena de id Software, que salió al mercado diez días después. Si bien se considera que su competidor tiene una buena jugabilidad y un motor gráfico extensamente adoptado, UT tiene una inteligencia artificial superior, una movilidad más variada, y un "disparo alternativo" para las armas, lo que introdujo varios elementos más para la estrategia, más una larga variedad de capacidades multijugador.[3]​
+
+Al igual que en su antecesor, la facilidad con la cual algunos jugadores pueden crear y lanzar modificaciones al núcleo del juego fue un factor clave que contribuyó a la longevidad del UT. El Unreal mejoró aún más la naturaleza amistosa para con las modificaciones de su predecesor con soporte para modificaciones y mutadores como Sniper Arena, Instagib, y más. Más adelante, los "clanes" de UT Classic, o equipos de juego, y la cantidad de sitios de comunidades, fanes y clanes dedicados al Unreal Tournament continúa sosteniendo la popularidad del juego, años después de su lanzamiento inicial.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="tables-container">
+        <table class="info-table">
+            <tr>
+                <th>calificacion</th>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <div class="rating">
+                        <span data-value="5">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="1">★</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Fecha lanzamiento</th>
+            </tr>
+            <tr>
+                <td>Lanzado al mercado en 1999</td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Logros disponibles</th>
+            </tr>
+            <tr>
+                <td>211</td>
+            </tr>
+        </table>
+    </div>
+<script src="juego_02.js"></script>
+</body>
+</html>

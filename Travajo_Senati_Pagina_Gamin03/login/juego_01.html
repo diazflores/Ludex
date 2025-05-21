@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observando</title>
+    <style>
+        /* Colores basados en el diseño de Steam */
+        :root {
+            --steam-black: #171a21;
+            --steam-dark-gray: #1b2838;
+            --steam-blue: #66c0f4;
+            --steam-green: #5cdb95;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--steam-dark-gray);
+            color: var(--steam-blue);
+        }
+
+        header {
+            background-color: var(--steam-black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--steam-blue);
+        }
+
+        .inicio-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--steam-blue);
+            color: var(--steam-black);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .inicio-btn:hover {
+            background-color: var(--steam-green);
+        }
+
+        .slider-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto; /* Centrado horizontal */
+            overflow: hidden;
+            position: relative;
+            border: 2px solid var(--steam-blue);
+            border-radius: 10px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+        .tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    width: 30%; /* Cada tabla ocupa el 30% del ancho del contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.slider-and-table {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre el slider y la tabla */
+    align-items: center; /* Alinea verticalmente el slider y la tabla */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 40px; /* Espaciado entre el slider y la tabla */
+}
+
+.tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.detalle-grande {
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    font-weight: normal; /* Opcional: texto menos grueso */
+    color: white; /* Cambia el color del texto a blanco */
+    height: 400px; /* Permite que la altura se ajuste automáticamente al contenido */
+    vertical-align: top; /* Alinea el texto en la parte superior de la celda */
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding: 10px; /* Espaciado interno */
+}
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.rating span {
+    font-size: 32px; /* Tamaño de las estrellas */
+    color: gray; /* Color de las estrellas no seleccionadas */
+    transition: color 0.3s;
+}
+
+.rating span:hover,
+.rating span:hover ~ span {
+    color: gold; /* Color de las estrellas al pasar el mouse */
+}
+
+.rating span.selected,
+.rating span.selected ~ span {
+    color: gold; /* Color de las estrellas seleccionadas */
+}
+.slider-container {
+    width: 1000px;
+    height: 500px;
+    margin: 20px auto; /* Centrado horizontal */
+    overflow: hidden;
+    position: relative; /* Necesario para posicionar los botones */
+    border: 2px solid var(--steam-blue);
+    border-radius: 10px;
+}
+
+.slider-buttons {
+    position: absolute;
+    bottom: 10px; /* Posiciona los botones en la parte inferior del slider */
+    right: 10px; /* Alinea los botones a la derecha */
+    display: flex;
+    gap: 5px; /* Espaciado entre los botones */
+}
+
+.slider-buttons button {
+    padding: 5px 10px; /* Tamaño pequeño */
+    background-color: var(--steam-blue);
+    color: var(--steam-black);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px; /* Tamaño de fuente pequeño */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.slider-buttons button:hover {
+    background-color: var(--steam-green);
+}
+.slider-and-table .info-table {
+    width: 30%; /* Ajusta el ancho de la tabla */
+    height: 500px; /* Ajusta la altura de la tabla */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+p {
+    font-size: 36px; /* Tamaño de fuente más grande */
+    color: var(--steam-blue); /* Mantiene el color azul original */
+    text-align: left; /* Alinea el texto a la izquierda */
+    margin: 5px  10px; /* Reduce el margen inferior a 2px */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Observando</h1>
+        <a href="pagina_venta.html" class="inicio-btn">Inicio</a>
+    </header>
+    <p>minecraft</p>
+    <div class="slider-and-table">
+        <div class="slider-container">
+            <div class="slider">
+                <img src="https://1.bp.blogspot.com/-Xd0NzegXTyE/WcBaqtOANEI/AAAAAAAAAQw/eJ8RVaEJ8escz4f42UvpsUrK4zhjZn1WgCLcBGAs/s1600/H2x1_NSwitch_MinecraftNintendoSwitchEdition.jpg" alt="Slide 1" class="active">
+                <img src="https://2.bp.blogspot.com/-_XFAENyAAbY/W0y45GlY0lI/AAAAAAAAAIM/wjgbW2i87BUhy_a1deZOwRc1BvaI1lFxwCLcBGAs/s1600/minecraft-ps4-image.jpg" alt="Slide 2">
+                <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/10/minecraft-is-losing-one-of-its-features-in-2025.jpg" alt="Slide 3">
+            </div>
+            <div class="slider-buttons">
+                <button id="prev-btn">◀</button>
+                <button id="next-btn">▶</button>
+            </div>
+        </div>
+        <table class="info-table">
+            <tr>
+                <th>Minecraft</th>
+            </tr>
+            <tr>
+                <td class="detalle-grande">
+                    Detalle 1<br>
+                    Minecraft es un videojuego de construcción de tipo «mundo abierto» o en inglés sandbox creado originalmente por el sueco Markus Persson (conocido comúnmente como «Notch»), que creó posteriormente Mojang Studios (actualmente parte de Microsoft).[19]​[20]​ Está programado en el lenguaje de programación Java[21]​ para la versión Java Edition y posteriormente desarrollado en C++ para la versión de Bedrock Edition.[22]​ Fue lanzado el 17 de mayo de 2009, y después de numerosos cambios, su primera versión estable «1.0» fue publicada el 18 de noviembre de 2011.
+
+
+                    Markus Persson, el creador de Minecraft.
+                    Un mes antes del lanzamiento de su versión completa se estrenó una versión para dispositivos móviles llamada Minecraft: Pocket Edition en Android,[23]​ y el 17 de noviembre del mismo año fue lanzada la misma versión para iOS, aunque posteriormente esta pasaría a ser Minecraft: Bedrock Edition.[24]​[25]​ El 9 de mayo de 2012 fue lanzada la versión del juego para Xbox 360 y PS3. Todas las versiones de Minecraft reciben actualizaciones constantes desde su lanzamiento. En octubre de 2014, Minecraft lanzó su edición para PlayStation Vita,[26]​ desarrollada por Mojang y 4J Studios. Esta versión presenta las mismas actualizaciones y similares características que las otras versiones de consola; además, cuenta con el sistema de venta cruzada, es decir que al comprar la versión de PlayStation 3 se obtiene también la de PlayStation Vita. A marzo de 2024 se habían vendido más de 300 millones de copias, siendo actualmente el videojuego más vendido de la historia
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="tables-container">
+        <table class="info-table">
+            <tr>
+                <th>calificalo</th>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <div class="rating">
+                        <span data-value="5">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="1">★</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Fecha lanzamiento</th>
+            </tr>
+            <tr>
+                <td>17 de mayo de 2009</td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Logros disponibles</th>
+            </tr>
+            <tr>
+                <td>110</td>
+            </tr>
+        </table>
+    </div>
+<script src="juego_01.js"></script>
+</body>
+</html>

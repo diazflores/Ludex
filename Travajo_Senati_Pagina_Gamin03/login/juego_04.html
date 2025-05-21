@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observando</title>
+    <style>
+        /* Colores basados en el diseño de Steam */
+        :root {
+            --steam-black: #171a21;
+            --steam-dark-gray: #1b2838;
+            --steam-blue: #66c0f4;
+            --steam-green: #5cdb95;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--steam-dark-gray);
+            color: var(--steam-blue);
+        }
+
+        header {
+            background-color: var(--steam-black);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--steam-blue);
+        }
+
+        .inicio-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--steam-blue);
+            color: var(--steam-black);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .inicio-btn:hover {
+            background-color: var(--steam-green);
+        }
+
+        .slider-container {
+            width: 1000px;
+            height: 500px;
+            margin: 20px auto; /* Centrado horizontal */
+            overflow: hidden;
+            position: relative;
+            border: 2px solid var(--steam-blue);
+            border-radius: 10px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+        .tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    width: 30%; /* Cada tabla ocupa el 30% del ancho del contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.slider-and-table {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre el slider y la tabla */
+    align-items: center; /* Alinea verticalmente el slider y la tabla */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 40px; /* Espaciado entre el slider y la tabla */
+}
+
+.tables-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre las tablas */
+    margin: 20px auto; /* Centrado horizontal */
+    gap: 20px; /* Espaciado entre las tablas */
+}
+
+.info-table {
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th,
+.info-table td {
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+
+.info-table th {
+    background-color: var(--steam-blue); /* Fondo azul para el encabezado */
+    color: var(--steam-black); /* Texto negro */
+}
+
+.info-table td {
+    background-color: var(--steam-black); /* Fondo negro para las celdas */
+}
+.detalle-grande {
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    font-weight: normal; /* Opcional: texto menos grueso */
+    color: white; /* Cambia el color del texto a blanco */
+    height: 400px; /* Permite que la altura se ajuste automáticamente al contenido */
+    vertical-align: top; /* Alinea el texto en la parte superior de la celda */
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding: 10px; /* Espaciado interno */
+}
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.rating span {
+    font-size: 32px; /* Tamaño de las estrellas */
+    color: gray; /* Color de las estrellas no seleccionadas */
+    transition: color 0.3s;
+}
+
+.rating span:hover,
+.rating span:hover ~ span {
+    color: gold; /* Color de las estrellas al pasar el mouse */
+}
+
+.rating span.selected,
+.rating span.selected ~ span {
+    color: gold; /* Color de las estrellas seleccionadas */
+}
+.slider-container {
+    width: 1000px;
+    height: 500px;
+    margin: 20px auto; /* Centrado horizontal */
+    overflow: hidden;
+    position: relative; /* Necesario para posicionar los botones */
+    border: 2px solid var(--steam-blue);
+    border-radius: 10px;
+}
+
+.slider-buttons {
+    position: absolute;
+    bottom: 10px; /* Posiciona los botones en la parte inferior del slider */
+    right: 10px; /* Alinea los botones a la derecha */
+    display: flex;
+    gap: 5px; /* Espaciado entre los botones */
+}
+
+.slider-buttons button {
+    padding: 5px 10px; /* Tamaño pequeño */
+    background-color: var(--steam-blue);
+    color: var(--steam-black);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px; /* Tamaño de fuente pequeño */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.slider-buttons button:hover {
+    background-color: var(--steam-green);
+}
+.slider-and-table .info-table {
+    width: 30%; /* Ajusta el ancho de la tabla */
+    height: 500px; /* Ajusta la altura de la tabla */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: var(--steam-dark-gray); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto */
+    border: 2px solid var(--steam-blue); /* Bordes azules */
+    padding: 10px; /* Espaciado interno */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Observando</h1>
+        <a href="pagina_venta.html" class="inicio-btn">Inicio</a>
+    </header>
+
+    <div class="slider-and-table">
+        <div class="slider-container">
+            <div class="slider">
+                <img src="https://cdn.wallpapersafari.com/80/89/LYb86q.jpg" alt="Slide 1" class="active">
+                <img src="https://th.bing.com/th/id/OIP.dhrnu653e-ArSOvpY0X8kwHaEK?rs=1&pid=ImgDetMain" alt="Slide 2">
+                <img src="https://th.bing.com/th/id/R.98e95bece083206a397af85adb94f75e?rik=K0gWAJoiNj4Gew&riu=http%3a%2f%2fwww.dadsgamingaddiction.com%2fwp-content%2fuploads%2f2012%2f06%2f2012-06-26_00011.jpg&ehk=GydfwvhRBYPe73OfcweCKyTXkFhMFr3aA4G3PE%2fzD6s%3d&risl=&pid=ImgRaw&r=0" alt="Slide 3">
+            </div>
+            <div class="slider-buttons">
+                <button id="prev-btn">◀</button>
+                <button id="next-btn">▶</button>
+            </div>
+        </div>
+        <table class="info-table">
+            <tr>
+                <th>Left 4 Dead 2</th>
+            </tr>
+            <tr>
+                <td class="detalle-grande">
+                   <br>
+                   Left 4 Dead 2 es un videojuego de terror de disparos en primera persona desarrollado y publicado por Valve. La secuela de Left 4 Dead (2008) y el segundo juego de la serie Left 4 Dead, se lanzó para Microsoft Windows y Xbox 360 en noviembre de 2009, Mac OS X en octubre de 2010 y Linux en julio de 2013.
+
+                  Left 4 Dead 2 se basa en un juego centrado en la cooperación y el motor Source patentado de Valve, el mismo motor de juego utilizado en el Left 4 Dead original. Ambientado tras una pandemia apocalíptica, el juego se centra en cuatro nuevos supervivientes que luchan contra hordas de enemigos conocidos como los infectados, que desarrollan una psicosis grave y actúan de forma extremadamente agresiva. Los Supervivientes deben abrirse camino a lo largo de cinco campañas, intercaladas con casas seguras que actúan como puntos de control, con el objetivo de escapar al final de cada campaña. La jugabilidad se ve alterada procedimentalmente por el "Director de IA 2.0", que supervisa el rendimiento de los jugadores y ajusta el escenario para proporcionar un desafío dinámico. Otras características nuevas incluyen nuevos tipos de infectados especiales y un arsenal de armas cuerpo a cuerpo.
+                  <br>
+                  
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="tables-container">
+        <table class="info-table">
+            <tr>
+                <th>Tabla 1</th>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <div class="rating">
+                        <span data-value="5">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="1">★</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Fecha lanzamiento</th>
+            </tr>
+            <tr>
+                <td>octubre de 2010 </td>
+            </tr>
+        </table>
+        <table class="info-table">
+            <tr>
+                <th>Logros disponibles</th>
+            </tr>
+            <tr>
+                <td>110</td>
+            </tr>
+        </table>
+    </div>
+<script src="juego_04.js"></script>
+</body>
+</html>
